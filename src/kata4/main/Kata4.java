@@ -11,7 +11,7 @@ import kata4.model.Histogram;
 import kata4.model.Mail;
 import kata4.view.HistogramDisplay;
 import kata4.view.MailHistogramBuilder;
-import kata4.view.MailListReader;
+import kata4.view.MailListReaderBD;
 
 /**
  *
@@ -19,35 +19,10 @@ import kata4.view.MailListReader;
  */
 public class Kata4 {
     
-    //private static HistogramDisplay histoDisplay;
-    private static MailListReader lecturaLista;
-    private static String fileName;
-    private static List<Mail> mailList;
-    private static MailHistogramBuilder histogramBuild;
-    private static Histogram<String> histogram;
-    
     public static void main(String[] args) throws IOException {
-        execute();
-    }
-    
-    private static void execute(){
-        input();
-        process();
-        output();
-    }
-
-    private static void input(){
-        lecturaLista = new MailListReader();
-        fileName = "email.txt";
-        mailList = lecturaLista.read(fileName);
-    }
-
-    private static void process(){
-        histogramBuild = new MailHistogramBuilder();
-        histogram = histogramBuild.build(mailList);
-    }
-
-    private static void output(){
-        new HistogramDisplay(histogram).execute();
-    }
+        MailListReaderBD lecturaLista = new MailListReaderBD();
+        List<Mail> mailList = lecturaLista.read();
+        MailHistogramBuilder histogramBuild = new MailHistogramBuilder();
+        lecturaLista.list();
+    }    
 }
